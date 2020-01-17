@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Template • TodoMVC</title>
+	<title>我的便签</title>
 	<link rel="stylesheet" href="node_modules/todomvc-common/base.css">
 	<link rel="stylesheet" href="node_modules/todomvc-app-css/index.css">
 	<!-- CSS overrides - remove if you don't need it -->
@@ -14,15 +14,16 @@
 <body>
 	<section class="todoapp" id="todoApp">
 		<header class="header">
-			<h1>todos</h1>
-			<input v-focus class="new-todo" placeholder="What needs to be done?" @keyup.enter="addTodo">
+			<h1>我的便签</h1>
+			<textarea rows="1" v-focus class="new-todo new_todo" placeholder="What needs to be done?" @keydown.enter.exact="addTodo" @keydown.shift.enter.exact="lineFeed"></textarea>
+			<label class="toggle-all2" for="toggle-all"></label>
 
 		</header>
 		<!-- This section should be hidden by default and shown when there are todos -->
 		<template v-if="todos.length">
 			<section class="main">
 				<input id="toggle-all" class="toggle-all" type="checkbox" v-model="toggleAllAtatus">
-				<label for="toggle-all">Mark all as complete</label>
+<!--				<label for="toggle-all">Mark all as complete</label>-->
 				<ul class="todo-list">
 					<!-- These are here just to show the structure of the list items -->
 					<!-- List items should get the class `editing` when editing and `completed` when marked as completed -->
@@ -33,8 +34,8 @@
 							<label @dblclick="editTodo(item)">{{ item.title }}</label>
 							<button class="destroy" @click="removeTodo(item)"></button>
 						</div>
-						<input class="edit" @keyup.esc="cancelEdit()" @keyup.enter="saveEdit(item,index,$event)" @blur="saveEdit(item,index,$event)"
-						:value=" item.title " v-todo-focus="currentEdit === item">
+						<textarea rows="1" class="edit" @keyup.esc="cancelEdit()" @keydown.enter.exact="saveEdit(item,index,$event)" @keydown.shift.enter.exact="lineFeed" @blur="saveEdit(item,index,$event)"
+						          :value=" item.title " v-todo-focus="currentEdit === item"></textarea>
 					</li>
 				</ul>
 			</section>
@@ -74,9 +75,7 @@
 			<a href="http://todomvc.com">TodoMVC</a>
 		</p>
 	</footer>
-	<!-- Scripts here. Don't remove ↓ -->
-	<!-- <script src="node_modules/todomvc-common/base.js"></script> -->
-	<script src="./node_modules/vue/dist/vue.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<script src="js/app.js"></script>
 </body>
 

@@ -20,6 +20,7 @@
 		methods: {
 			// 2.添加任务项
 			addTodo(e) {
+				e.preventDefault()
 				const todos = this.todos;
 				const input = e.target;
 				const value = input.value;
@@ -33,13 +34,20 @@
 					return
 				}
 				// 2.3 将新数据添加到数据中
-				todos.push({
+				todos.unshift({
 					id,
 					title: value,
 					done: false
 				})
 				// 2.4 清空输入框
 				input.value = '';
+			},
+
+			// 换行
+			lineFeed (e) {
+				e.preventDefault()
+				const input = e.target;
+				input.value = input.value + '\n';
 			},
 
 			// 3.删除任务项
@@ -49,10 +57,12 @@
 					return t.id === item.id
 				})
 				if (index !== -1) {
-					// 3.2 删除数组一项数据
-					this.todos.splice(index, 1);
+					let r = confirm("确认删除吗？")
+					if (r) {
+						// 3.2 删除数组一项数据
+						this.todos.splice(index, 1);
+					}
 				}
-
 			},
 
 			// 4.双击编辑任务项

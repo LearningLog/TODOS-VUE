@@ -1,8 +1,32 @@
-/*
+.main {
+    max-height: calc(100vh - 400px);
+    overflow: auto;
+}
 
-app-template.css overrides
+.toggle-all2 {
+    width: 60px;
+    height: 34px;
+    font-size: 0;
+    position: absolute;
+    top: 14px;
+    left: -13px;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.toggle-all2:before {
+    content: '❯';
+    font-size: 22px;
+    color: #e6e6e6;
+    padding: 10px 27px 10px 27px;
+}
 
-remove this comment if used
-remove this file if not
-
-*/
+.new_todo {
+    min-height: 66px;
+    max-width: 590px;
+}
+.new-todo, .edit {
+    max-width: 570px;
+}
+.todo-list li label {
+    white-space: pre-wrap;
+}

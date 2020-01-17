@@ -20,13 +20,16 @@
     padding: 10px 27px 10px 27px;
 }
 
-.new_todo {
-    min-height: 66px;
-    max-width: 590px;
-}
 .new-todo, .edit {
-    max-width: 570px;
+    max-width: calc(100% - 44px) !important;
+    max-height: 200px;
+    overflow: auto;
 }
 .todo-list li label {
     white-space: pre-wrap;
+}
+
+.new_todo {
+    min-height: 66px;
+    max-width: 590px!important;
 }

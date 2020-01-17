@@ -34,7 +34,7 @@
 							<label @dblclick="editTodo(item)">{{ item.title }}</label>
 							<button class="destroy" @click="removeTodo(item)"></button>
 						</div>
-						<textarea rows="1" class="edit" @keyup.esc="cancelEdit()" @keydown.enter.exact="saveEdit(item,index,$event)" @keydown.shift.enter.exact="lineFeed" @blur="saveEdit(item,index,$event)"
+						<textarea class="edit" @keyup.esc="cancelEdit()" @keydown.enter.exact="saveEdit(item,index,$event)" @keydown.shift.enter.exact="lineFeed" @blur="saveEdit(item,index,$event)"
 						          :value=" item.title " v-todo-focus="currentEdit === item"></textarea>
 					</li>
 				</ul>

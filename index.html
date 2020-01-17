@@ -31,7 +31,8 @@
 					<li v-for="(item,index) in filterTodos" :class="{completed: item.done, editing: item === currentEdit}">
 						<div class="view">
 							<input class="toggle" type="checkbox" v-model="item.done">
-							<label @dblclick="editTodo(item)">{{ item.title }}</label>
+							<label v-if="item.done">{{ item.title }}</label>
+							<label v-else @dblclick="editTodo(item)">{{ item.title }}</label>
 							<button class="destroy" @click="removeTodo(item)"></button>
 						</div>
 						<textarea class="edit" @keyup.esc="cancelEdit()" @keydown.enter.exact="saveEdit(item,index,$event)" @keydown.shift.enter.exact="lineFeed" @blur="saveEdit(item,index,$event)"

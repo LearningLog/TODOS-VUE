@@ -15,7 +15,8 @@
 			todos,
 			currentEdit: null,
 			filterTodos: [],
-			hash: ''
+			hash: '',
+			idCount: localStorage.getItem('idCount') || 0
 		},
 		methods: {
 			// 2.添加任务项
@@ -25,10 +26,11 @@
 				const input = e.target;
 				const value = input.value;
 				todos.title = value;
-				// 2.1获取最后一个任务项
-				const lastItem = todos[todos.length - 1];
-				// 获取最后一个任务项id
-				const id = lastItem ? lastItem.id + 1 : 1;
+
+				// 设置id
+				const id = ++this.idCount;
+				localStorage.setItem('idCount', this.idCount)
+
 				// 2.2 非空校验
 				if (!value.trim()) {
 					return
@@ -53,14 +55,16 @@
 			// 3.删除任务项
 			// 3.1 绑定点击事件，并将该任务项下标作为参数传入
 			removeTodo(item) {
-				const index = this.todos.findIndex(function (t) {
-					return t.id === item.id
-				})
-				if (index !== -1) {
-					let r = confirm("确认删除吗？")
-					if (r) {
+				let r = confirm("确认删除吗？")
+				if (r) {
+					const index = this.todos.findIndex(function (t) {
+						return t.id === item.id
+					})
+					if (index > -1) {
 						// 3.2 删除数组一项数据
 						this.todos.splice(index, 1);
+					} else {
+
 					}
 				}
 			},
@@ -107,7 +111,7 @@
 		// 计算属性选项对象
 		// 计算属性的本质就是带有行为的属性，只能当属性实行，不能调用
 		// 计算属性和方法的唯一区别是：
-		/**	
+		/**
 		 * 计算属性会把计算结果进行缓存，
 		 * 如果使用多次该计算属性，实际上只调用了一次
 		 * 然而换成方法的话，每使用一次就要调用一次
@@ -126,8 +130,8 @@
 				get: function () {
 					// every 方法对每一个元素执行条件判断
 					const toggleAll = this.todos.every(function (item) {
-						// 如果每个元素.done === true ，every 返回 true 
-						// 只要有一个元素.done === false ，every 返回 false 
+						// 如果每个元素.done === true ，every 返回 true
+						// 只要有一个元素.done === false ，every 返回 false
 						return item.done === true
 					})
 					return toggleAll
